@@ -3,20 +3,21 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
         center: {lat: -33.865427, lng: 151.196123},
-        mapTypeId: 'terrain'
+
     });
 
     var script = document.createElement('script');
 
-    script.src = 'data.js';
+    script.src = 'data2.js';
     document.getElementsByTagName('head')[0].appendChild(script);
 	//eqfeed_callback();
 }
 
 function eqfeed_callback(data) {
-	
+
 		
 	var heatmapData = [];
+
 	for(var id in data.pin){
 		var dotted = data.pin[id];
 		
@@ -26,13 +27,31 @@ function eqfeed_callback(data) {
 		};
 		heatmapData.push(mapData);
 	}
-	
-	console.log(heatmapData)
+
+
 	var heatmap = new google.maps.visualization.HeatmapLayer({
         data: heatmapData,
+        weightLocation: heatmapData,
         dissipating: false,
+        gradient: [
+            'rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 1)',
+            'rgba(0, 191, 255, 1)',
+            'rgba(0, 127, 255, 1)',
+            'rgba(0, 63, 255, 1)',
+            'rgba(0, 0, 255, 1)',
+            'rgba(0, 0, 223, 1)',
+            'rgba(0, 0, 191, 1)',
+            'rgba(0, 0, 159, 1)',
+            'rgba(0, 0, 127, 1)',
+            'rgba(63, 0, 91, 1)',
+            'rgba(127, 0, 63, 1)',
+            'rgba(191, 0, 31, 1)',
+            'rgba(255, 0, 0, 1)'
+        ],
         map: map
     });
+    heatmap.setMap(map);
     /* 
     for (var i = 0; i < results.pin.length; i++) {
         var lat = results.pin[i].latitude;
