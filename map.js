@@ -8,16 +8,18 @@ function initMap() {
 
     var script = document.createElement('script');
 
-    script.src = 'GeoJSONP.js';
+    script.src = 'data.js';
     document.getElementsByTagName('head')[0].appendChild(script);
 
 }
 
 function eqfeed_callback(results) {
     var heatmapData = [];
-    for (var i = 0; i < results.features.length; i++) {
-        var coords = results.features[i].geometry.coordinates;
-        var latLng = new google.maps.LatLng(coords[1], coords[0]);
+    for (var i = 0; i < results.pin.length; i++) {
+        var lat = results.pin[i].latitude;
+        var lng = results.pin[i].longitude;
+        var latLng = new google.maps.LatLng(lat, lng);
+
         heatmapData.push(latLng);
     }
     var heatmap = new google.maps.visualization.HeatmapLayer({
@@ -25,4 +27,5 @@ function eqfeed_callback(results) {
         dissipating: false,
         map: map
     });
+    return console.log(heatmapData);
 }
