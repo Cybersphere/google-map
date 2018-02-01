@@ -1,16 +1,17 @@
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
-        center: {lat: -33.865427, lng: 151.196123},
+        zoom: 4,
+        center: {lat: 70.259452, lng: 107.2265625},
+        mapTypeId: 'satellite'
+
 
     });
 
     var script = document.createElement('script');
 
-    script.src = 'data2.js';
+    script.src = 'data.js';
     document.getElementsByTagName('head')[0].appendChild(script);
-	//eqfeed_callback();
 }
 
 function eqfeed_callback(data) {
@@ -49,17 +50,9 @@ function eqfeed_callback(data) {
             'rgba(191, 0, 31, 1)',
             'rgba(255, 0, 0, 1)'
         ],
-        map: map
+        map: map,
+        radius: 3
     });
     heatmap.setMap(map);
-    /* 
-    for (var i = 0; i < results.pin.length; i++) {
-        var lat = results.pin[i].latitude;
-        var lng = results.pin[i].longitude;
-        var latLng = new google.maps.LatLng(lat, lng);
 
-        heatmapData.push(latLng);
-    }+
-	console.log(heatmapData)
-     */
 }
